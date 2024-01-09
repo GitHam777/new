@@ -1,0 +1,1007 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class initialDetail {
+protected:
+  string name;
+  string transportMode;
+  int totalTickets;
+
+public:
+  void enterName(void) {
+    string first, last;
+    cout << "\n Enter first name: ";
+    cin >> first;
+    cout << " Enter last name: ";
+    cin >> last;
+    name = first + " " + last;
+    cout << " Name registered successfully\n\n";
+  }
+  void enterNumberofTickets(void) {
+    cin >> totalTickets;
+    while ((totalTickets < 1) || (totalTickets > 20)) {
+      cout << " ERROR201! Invalid number of tickets!\n";
+      cout << " Enter number of tickets: ";
+      cin >> totalTickets;
+    }
+    cout << " Total " << totalTickets << " has been tokened successfully\n\n";
+  }
+  string displayName(void) { return name; }
+  string displayTransportMode(void) { return transportMode; }
+  int displayTotalTickets(void) { return totalTickets; }
+};
+
+class roadways : public initialDetail {
+  string travelType;
+  string operatorName;
+  string acOption;
+  string route;
+  int travelTypeDummy, ACorNotDummy;
+
+public:
+  roadways(string transportMode) { this->transportMode = transportMode; }
+  void enterTravelType(void) {
+    int num;
+    cin >> num;
+    while ((num != 1) && (num != 2)) {
+      cout << "\n ERROR301! Choice does not exist!\n";
+      cout << " Enter your travel type option: ";
+      cin >> num;
+    }
+    travelTypeDummy = num;
+    if (num == 1) {
+      cout << " Local Bus type selected successfully\n\n";
+      travelType = "Local Bus";
+    } else {
+      cout << " Intercity Bus type selected successfully\n\n";
+      travelType = "Intercity Bus";
+    }
+  }
+  void enterAcOption(void) {
+    int num;
+    cin >> num;
+    while ((num != 1) && (num != 2)) {
+      cout << "\n ERROR302! Choice does not exist!\n";
+      cout << " Enter AC Option: ";
+      cin >> num;
+    }
+    ACorNotDummy = num;
+    if (num == 1) {
+      cout << " Non AC option selected successfully";
+      acOption = "Non AC";
+    } else {
+      cout << " Full AC option selected successfully";
+      acOption = "Full AC";
+    }
+  }
+  void enterOperatorName(void) {
+    if (travelTypeDummy == 2) {
+      if (ACorNotDummy == 2) {
+        cout << "\n\n Enter Bus Operator \n";
+        cout << " 1. WBTC\n 2. GreenLine\n 3. Shyamoli\n";
+        cout << " Enter Operator: ";
+        int num;
+        cin >> num;
+        while ((num > 3) || (num < 1)) {
+          cout << "\n ERROR304! Choice does not exist!\n";
+          cout << " Enter Operator: ";
+          cin >> num;
+        }
+        switch (num) {
+        case 1:
+          cout << " WBTC operator selected successfully\n\n";
+          operatorName = "WBTC";
+          break;
+        case 2:
+          cout << " GreenLine operator selected successfully\n\n";
+          operatorName = "GreenLine";
+          break;
+        case 3:
+          cout << " Shyamoli operator selected successfully\n\n";
+          operatorName = "Shyamoli";
+        }
+      } else {
+        cout << "\n\n Enter Bus Operator \n";
+        cout << " 1. SBSTC\n 2. WBTC\n";
+        cout << " Enter Operator: ";
+        int num;
+        cin >> num;
+        while ((num > 2) || (num < 1)) {
+          cout << "\n ERROR303! Choice does not exist!\n";
+          cout << " Enter Operator: ";
+          cin >> num;
+        }
+        switch (num) {
+        case 1:
+          cout << " SBSTC operator selected successfully\n\n";
+          operatorName = "SBSTC";
+          break;
+        case 2:
+          cout << " WBTC operator selected successfully\n\n";
+          operatorName = "WBTC";
+        }
+      }
+    } else {
+      if (ACorNotDummy == 1) {
+        operatorName = "Private Blue";
+      } else {
+        operatorName = "WBTC";
+      }
+    }
+  }
+  void enterRoute(void) {
+    if (travelTypeDummy == 1) {
+      cout << "\n\n Enter your route\n";
+      cout << " 1. Amtala -- Rajabazar          (235)\n";
+      cout << " 2. Babughat -- Raharabazar     (78/1)\n";
+      cout << " 3. Alipore Zoo -- Agarpara      (230)\n";
+      cout << " 4. Purbapara -- Howrah           (56)\n";
+      cout << " 5. Barrackpore -- Esplanade      (78)\n";
+      cout << " 6. Dakshineshwar -- Barasat    (DN43)\n";
+      cout << " 7. Sodepur Girza -- Esplanade  (214A)\n";
+      cout << "\n Enter your route option: ";
+      int num;
+      cin >> num;
+      while ((num > 7) || (num < 1)) {
+        cout << " ERROR305! Route option does not exist!\n";
+        cout << " Enter correct route option: ";
+        cin >> num;
+      }
+      switch (num) {
+      case 1:
+        cout << " Amtala -- Rajabazar route selected successfully\n";
+        route = "Amtala -- Rajabazar";
+        break;
+      case 2:
+        cout << " Babughat -- Raharabazar route selected successfully\n";
+        route = "Babughat -- Raharabazar";
+        break;
+      case 3:
+        cout << " Alipore Zoo -- Agarpara route selected successfully\n";
+        route = "Alipore Zoo -- Agarpara";
+        break;
+      case 4:
+        cout << " Purbapara -- Howrah route selected successfully\n";
+        route = "Purbapara -- Howrah";
+        break;
+      case 5:
+        cout << " Barrackpore -- Esplanade route selected successfully\n";
+        route = "Barrackpore -- Esplanade";
+        break;
+      case 6:
+        cout << " Dakshineshwar -- Barasat route selected successfully\n";
+        route = "Dakshineshwar -- Barasat";
+        break;
+      case 7:
+        cout << " Sodepur Girza -- Esplanade route selected successfully\n";
+        route = "Sodepur Girza -- Esplanade";
+      }
+    } else {
+      cout << " Enter your route\n";
+      cout << " 1. Barrackpore -- Asansol   \n";
+      cout << " 2. Barrackpore -- Bardhaman \n";
+      cout << " 3. Karunamoyee -- Digha     \n";
+      cout << " 4. Karunamoyee -- Purulia   \n";
+      cout << " 5. Esplanade -- Durgapur    \n";
+      cout << " 6. Esplanade -- Puri        \n";
+      cout << " 7. Esplanade -- Siliguri    \n";
+      cout << "\n Enter your route option: ";
+      int num;
+      cin >> num;
+      while ((num > 7) || (num < 1)) {
+        cout << " ERROR306! Route option does not exist!\n";
+        cout << " Enter correct route option: ";
+        cin >> num;
+      }
+      switch (num) {
+      case 1:
+        cout << " Barrackpore -- Asansol route selected successfully\n";
+        route = "Barrackpore -- Asansol";
+        break;
+      case 2:
+        cout << " Barrackpore -- Bardhaman route selected successfully\n";
+        route = "Barrackpore -- Bardhaman";
+        break;
+      case 3:
+        cout << " Karunamoyee -- Digha route selected successfully\n";
+        route = "Karunamoyee -- Digha";
+        break;
+      case 4:
+        cout << " Karunamoyee -- Purulia route selected successfully\n";
+        route = "Karunamoyee -- Purulia";
+        break;
+      case 5:
+        cout << " Esplanade -- Durgapur route selected successfully\n";
+        route = "Esplanade -- Durgapur";
+        break;
+      case 6:
+        cout << " Esplanade -- Puri route selected successfully\n";
+        route = "Esplanade -- Puri";
+        break;
+      case 7:
+        cout << " Esplanade -- Siliguri route selected successfully\n";
+        route = "Esplanade -- Siliguri";
+      }
+    }
+  }
+  string displayTravelType(void) { return travelType; }
+  string displayOperatorName(void) { return operatorName; }
+  string displayAC(void) { return acOption; }
+  void mainDisplayScreen(void) {
+    cout << "----------------------------------------------\n";
+    cout << "----- ROADWAYS TRAVEL AND BOOKING TICKET -----\n\n";
+    cout << "  Name: " << name << endl;
+    cout << "  Mode of Transport: " << transportMode << endl;
+    cout << "  Travelling Type: " << travelType << endl;
+    cout << "  AC Option: " << acOption << endl;
+    cout << "  Operator Name: " << operatorName << endl;
+    cout << "  Route: " << route << endl;
+    cout << "  Total Tickets booked: " << totalTickets << endl << endl;
+    cout << "----------------------------------------------";
+  }
+};
+
+class railways : public initialDetail {
+  string travelType;
+  string coachType;
+  string coachAC;
+  string route;
+  int travelTypeDummy, ACorNotDummy;
+
+public:
+  railways(string transportMode) { this->transportMode = transportMode; }
+  void enterTravelType(void) {
+    int num;
+    cin >> num;
+    while ((num != 1) && (num != 2)) {
+      cout << "\n ERROR401! Choice does not exist!\n";
+      cout << "Enter travel type: ";
+      cin >> num;
+    }
+    travelTypeDummy = num;
+    if (num == 1) {
+      cout << " Local Train type selected successfully\n\n";
+      travelType = "Local Train";
+    } else {
+      cout << " Express Train type selected successfully\n\n";
+      travelType = "Express Train";
+    }
+  }
+  void enterCoachAC(void) {
+    int num;
+    cin >> num;
+    while ((num != 1) && (num != 2)) {
+      cout << "\n ERROR402! Choice does not exist!\n";
+      cout << " Enter AC preference: ";
+      cin >> num;
+    }
+    ACorNotDummy = num;
+    if (num == 1) {
+      cout << " Non AC type selected successfully\n\n";
+      coachAC = "Non AC";
+    } else {
+      cout << " Full AC type selected successfully\n\n";
+      coachAC = "Full AC";
+    }
+  }
+  void enterCoachType(void) {
+    if (travelTypeDummy == 1) {
+      cout << " Enter Gap Type\n";
+      cout << " 1. Regular\n 2. Galloping\n";
+      cout << " Enter your choice: ";
+      int num;
+      cin >> num;
+      while ((num != 1) && (num != 2)) {
+        cout << "\n ERROR403! Choice does not exist!\n";
+        cout << " Enter your choice: ";
+        cin >> num;
+      }
+      if (num == 1) {
+        cout << " Regular Stops type selected successfully\n\n";
+        coachType = "Regular";
+      } else {
+        cout << " Galloping Stops type selected successfully\n\n";
+        coachType = "Galloping";
+      }
+    } else {
+      if (ACorNotDummy == 1) {
+        cout << " Enter Coach Type\n";
+        cout << " 1. Regular ICF\n 2. Regular LHB\n 3. Vande Sadharan\n\n";
+        cout << " Enter your choice: ";
+        int num;
+        cin >> num;
+        while ((num > 3) || (num < 1)) {
+          cout << "\n ERROR404! Choice does not exist!\n";
+          cout << " Enter your choice: ";
+          cin >> num;
+        }
+        switch (num) {
+        case 1:
+          cout << " Regular ICF coach type has been selected successfully\n\n";
+          coachType = "Regular ICF";
+          break;
+        case 2:
+          cout << " Regular LHB coach type has been selected successfully\n\n";
+          coachType = "Regular LHB";
+          break;
+        case 3:
+          cout << " Vande Sadharan coach type has been selected "
+                  "successfully\n\n";
+          coachType = "Vande Sadharan";
+        }
+      } else {
+        cout << " Enter Coach Type\n";
+        cout << " 1. Rajdhani\n 2. Duronto\n 3. Shatabdi\n 4. Garib Rath\n 5. "
+                "Jan Shatabdi\n 6. Vande Bharat\n\n";
+        cout << " Enter your choice: ";
+        int num;
+        cin >> num;
+        while ((num > 6) || (num < 1)) {
+          cout << "\n ERROR405! Choice does not exist!\n";
+          cout << " Enter your choice: ";
+        }
+        switch (num) {
+        case 1:
+          cout << " Rajdhani coach type has been selected successfully\n\n";
+          coachType = "Rajdhani";
+          break;
+        case 2:
+          cout << " Duronto coach type has been selected successfully\n\n";
+          coachType = "Duronto";
+          break;
+        case 3:
+          cout << " Shatabdi coach type has been selected successfully\n\n";
+          coachType = "Shatabdi";
+          break;
+        case 4:
+          cout << " Garib Rath coach type has been selected successfully\n\n";
+          coachType = "Garib Rath";
+          break;
+        case 5:
+          cout << " Jan Shatabdi coach type has been selected successfully\n\n";
+          coachType = "Jan Shatabdi";
+          break;
+        case 6:
+          cout << " Vande Bharat coach type has been selected successfully\n\n";
+          coachType = "Vande Bharat";
+        }
+      }
+    }
+  }
+  void enterRoute(void) {
+    if (travelTypeDummy == 1) {
+      cout << " Enter your route\n";
+      cout << " 1. Sealdah -- Krishnanagar\n";
+      cout << " 2. Sealdah -- Shantipur   \n";
+      cout << " 3. Sealdah -- Gende       \n";
+      cout << " 4. Sealdah -- Budge Budge \n";
+      cout << " 5. Sealdah -- Canning     \n";
+      cout << " 6. Howrah -- Bardhaman    \n";
+      cout << " 7. Howrah -- Midnapore    \n";
+      cout << " 8. Howrah -- Haldia       \n";
+      cout << " 9. Howrah -- Katwa        \n";
+      cout << "\n Enter your route option: ";
+      int num;
+      cin >> num;
+      while ((num > 9) || (num < 1)) {
+        cout << " ERROR406! Route option does not exist!\n";
+        cout << " Enter correct route option: ";
+        cin >> num;
+      }
+      switch (num) {
+      case 1:
+        cout << " Sealdah -- Krishnanagar route selected successfully\n";
+        route = "Sealdah -- Krishnanagar";
+        break;
+      case 2:
+        cout << " Sealdah -- Shantipur route selected successfully\n";
+        route = "Sealdah -- Shantipur";
+        break;
+      case 3:
+        cout << " Sealdah -- Gende route selected successfully\n";
+        route = "Sealdah -- Gende";
+        break;
+      case 4:
+        cout << " Sealdah -- Budge Budge route selected successfully\n";
+        route = "Sealdah -- Budge Budge";
+        break;
+      case 5:
+        cout << " Sealdah -- Canning route selected successfully\n";
+        route = "Sealdah -- Canning";
+        break;
+      case 6:
+        cout << " Howrah -- Bardhaman route selected successfully\n";
+        route = "Howrah -- Bardhaman";
+        break;
+      case 7:
+        cout << " Howrah -- Midnapore route selected successfully\n";
+        route = "Howrah -- Midnapore";
+        break;
+      case 8:
+        cout << " Howrah -- Haldia route selected successfully\n";
+        route = "Howrah -- Haldia";
+        break;
+      case 9:
+        cout << " Howrah -- Katwa route selected successfully\n";
+        route = "Howrah -- Katwa";
+      }
+    } else {
+      cout << " Enter your route\n";
+      cout << " 1. Sealdah -- Asansol  \n";
+      cout << " 2. Sealdah -- New Delhi\n";
+      cout << " 3. Sealdah -- Agartala \n";
+      cout << " 4. Howrah -- New Delhi \n";
+      cout << " 5. Howrah -- Bangalore \n";
+      cout << " 6. Howrah -- Patna     \n";
+      cout << " 7. Howrah -- Asansol   \n";
+      cout << "\n Enter your route option: ";
+      int num;
+      cin >> num;
+      while ((num > 7) || (num < 1)) {
+        cout << " ERROR407! Route option does not exist!\n";
+        cout << " Enter correct route option: ";
+        cin >> num;
+      }
+      switch (num) {
+      case 1:
+        cout << " Sealdah -- Asansol route selected successfully\n";
+        route = "Sealdah -- Asansol";
+        break;
+      case 2:
+        cout << " Sealdah -- New Delhi route selected successfully\n";
+        route = "Sealdah -- New Delhi";
+        break;
+      case 3:
+        cout << " Sealdah -- Agartala route selected successfully\n";
+        route = "Sealdah -- Agartala";
+        break;
+      case 4:
+        cout << " Howrah -- New Delhi route selected successfully\n";
+        route = "Howrah -- New Delhi";
+        break;
+      case 5:
+        cout << " Howrah -- Bangalore route selected successfully\n";
+        route = "Howrah -- Bangalore";
+        break;
+      case 6:
+        cout << " Howrah -- Patna route selected successfully\n";
+        route = "Howrah -- Patna";
+        break;
+      case 7:
+        cout << " Howrah -- Asansol route selected successfully\n";
+        route = "Howrah -- Asansol";
+      }
+    }
+  }
+  string displayTravelType(void) { return travelType; }
+  string displayCoachType(void) { return coachType; }
+  string displayCoachAC(void) { return coachAC; }
+  string displayRoute(void) { return route; }
+  void mainDisplayScreen(void) {
+    cout << "----------------------------------------------\n";
+    cout << "----- RAILWAYS TRAVEL AND BOOKING TICKET -----\n\n";
+    cout << " Name: " << name << endl;
+    cout << " Mode of Transport: " << transportMode << endl;
+    cout << " Travelling Type: " << travelType << endl;
+    cout << " AC Preference: " << coachAC << endl;
+    cout << " Coach Type: " << coachType << endl;
+    cout << " Route: " << route << endl;
+    cout << " Total Tickets booked: " << totalTickets << endl << endl;
+    cout << "----------------------------------------------";
+  }
+};
+
+class waterways : public initialDetail {
+  string travelType;
+  string operatorName;
+  string route;
+  int dummy;
+
+public:
+  waterways(string transportMode) { this->transportMode = transportMode; }
+  void enterTravelType(void) {
+    int num;
+    cin >> num;
+    while ((num != 1) && (num != 2)) {
+      cout << "\n ERROR501! Choice does not exist!\n";
+      cout << " Enter travel type: ";
+      cin >> num;
+    }
+    dummy = num;
+    if (num == 1) {
+      cout << " Steamer type registered successfully\n\n";
+      travelType = "Steamer";
+    } else {
+      cout << " Cruise Ship type registered successfully\n\n";
+      travelType = "Cruise Ship";
+    }
+  }
+  void enterOperatorName(void) {
+    if (dummy == 2) {
+      cout << " Enter Cruise Ship Operator \n";
+      cout << " 1. Oasis\n 2. Carnival\n 3. Azure\n 4. SS\n";
+      cout << " Enter Operator: ";
+      int num;
+      cin >> num;
+      while ((num > 4) || (num < 1)) {
+        cout << "\n ERROR502! Choice does not exist!\n";
+        cout << " Enter Operator: ";
+        cin >> num;
+      }
+      switch (num) {
+      case 1:
+        cout << " Oasis operator registered successfully\n\n";
+        operatorName = "Oasis";
+        break;
+      case 2:
+        cout << " Carnival operator registered successfully\n\n";
+        operatorName = "Carnival";
+        break;
+      case 3:
+        cout << " Azure operator registered successfully\n\n";
+        operatorName = "Azure";
+        break;
+      case 4:
+        cout << " SS operator registered successfully\n\n";
+        operatorName = "SS";
+      }
+    } else {
+      operatorName = "Local";
+    }
+  }
+  void enterRoute(void) {
+    if (dummy == 1) {
+      cout << " Enter your route\n";
+      cout << " 1. Panihati -- Konnagar       \n";
+      cout << " 2. Ariadaha -- Uttarpara      \n";
+      cout << " 3. Dakshineshwar -- Belur Math\n";
+      cout << " 4. Bagbazar -- Belur Math     \n";
+      cout << " 5. Bagbazar -- Sobhabazar     \n";
+      cout << " 6. Kolkata -- Howrah          \n";
+      cout << " 7. Babughat -- Howrah         \n";
+      cout << "\n Enter your route option: ";
+      int num;
+      cin >> num;
+      while ((num > 7) || (num < 1)) {
+        cout << " ERROR503! Route option does not exist!\n";
+        cout << " Enter correct route option: ";
+        cin >> num;
+      }
+      switch (num) {
+      case 1:
+        cout << " Panihati -- Konnagar route selected successfully\n";
+        route = "Panihati -- Konnagar";
+        break;
+      case 2:
+        cout << " Ariadaha -- Uttarpara route selected successfully\n";
+        route = "Ariadaha -- Uttarpara";
+        break;
+      case 3:
+        cout << " Dakshineshwar -- Belur Math route selected successfully\n";
+        route = "Dakshineshwar -- Belur Math";
+        break;
+      case 4:
+        cout << " Bagbazar -- Belur Math route selected successfully\n";
+        route = "Bagbazar -- Belur Math";
+        break;
+      case 5:
+        cout << " Bagbazar -- Sobhabazar route selected successfully\n";
+        route = "Bagbazar -- Sobhabazar";
+        break;
+      case 6:
+        cout << " Kolkata -- Howrah route selected successfully\n";
+        route = "Kolkata -- Howrah";
+        break;
+      case 7:
+        cout << " Babughat -- Howrah route selected successfully\n";
+        route = "Babughat -- Howrah";
+      }
+    } else {
+      cout << " Enter your route\n";
+      cout << " 1. Haldia -- Andaman       \n";
+      cout << " 2. Haldia -- Paradeep      \n";
+      cout << " 3. Haldia -- Visakhapatnam \n";
+      cout << " 4. Haldia -- Kakinada      \n";
+      cout << " 5. Haldia -- Ennore        \n";
+      cout << " 6. Haldia -- Chennai       \n";
+      cout << "\n Enter your route option: ";
+      int num;
+      cin >> num;
+      while ((num > 6) || (num < 1)) {
+        cout << " ERROR504! Route option does not exist!\n";
+        cout << " Enter correct route option: ";
+        cin >> num;
+      }
+      switch (num) {
+      case 1:
+        cout << " Haldia -- Andaman route selected successfully\n";
+        route = "Haldia -- Andaman";
+        break;
+      case 2:
+        cout << " Haldia -- Paradeep route selected successfully\n";
+        route = "Haldia -- Paradeep";
+        break;
+      case 3:
+        cout << " Haldia -- Visakhapatnam route selected successfully\n";
+        route = "Haldia -- Visakhapatnam";
+        break;
+      case 4:
+        cout << " Haldia -- Kakinada route selected successfully\n";
+        route = "Haldia -- Kakinada";
+        break;
+      case 5:
+        cout << " Haldia -- Ennore route selected successfully\n";
+        route = "Haldia -- Ennore";
+        break;
+      case 6:
+        cout << " Haldia -- Chennai route selected successfully\n";
+        route = "Haldia -- Chennai";
+      }
+    }
+  }
+  string displayTravelType(void) { return travelType; }
+  string displayOperatorName(void) { return operatorName; }
+  void mainDisplayScreen(void) {
+    cout << "-----------------------------------------------\n";
+    cout << "----- WATERWAYS TRAVEL AND BOOKING TICKET -----\n\n";
+    cout << "  Name: " << name << endl;
+    cout << "  Mode of Transport: " << transportMode << endl;
+    cout << "  Travelling Type: " << travelType << endl;
+    cout << "  Operator Name: " << operatorName << endl;
+    cout << "  Route: " << route << endl;
+    cout << "  Total Tickets booked: " << totalTickets << endl << endl;
+    cout << "-----------------------------------------------";
+  }
+};
+
+class airways : public initialDetail {
+  string travelType;
+  string airline;
+  string division;
+  string route;
+  int dummy;
+
+public:
+  airways(string transportMode) { this->transportMode = transportMode; }
+  void enterTravelType(void) {
+    int num;
+    cin >> num;
+    while ((num != 1) && (num != 2)) {
+      cout << "\n ERROR601! Choice does not exist!\n";
+      cout << " Enter travel type: ";
+      cin >> num;
+    }
+    dummy = num;
+    if (num == 1) {
+      cout << " Domestic Travel type registered successfully\n\n";
+      travelType = "Domestic";
+    } else {
+      cout << " International Travel type registered successfully\n\n";
+      travelType = "International";
+    }
+  }
+  void enterAirlineName(void) {
+    if (dummy == 1) {
+      cout << " Enter Airline\n";
+      cout << " 1. Indigo\n 2. Air India\n 3. SpiceJet\n 4. Vistara\n";
+      cout << "\n\n Enter your choice: ";
+      int num;
+      cin >> num;
+      while ((num > 4) || (num < 1)) {
+        cout << "\n ERROR602! Choice does not exist!\n";
+        cout << " Enter your choice: ";
+        cin >> num;
+      }
+      switch (num) {
+      case 1:
+        cout << " Indigo operator registered successfully\n\n";
+        airline = "Indigo";
+        break;
+      case 2:
+        cout << " Air India operator registered successfully\n\n";
+        airline = "Air India";
+        break;
+      case 3:
+        cout << " SpiceJet operator registered successfully\n\n";
+        airline = "SpiceJet";
+        break;
+      case 4:
+        cout << " Vistara operator registered successfully\n\n";
+        airline = "Vistara";
+      }
+    } else {
+      cout << " Enter Airline\n";
+      cout << " 1. Emirates\n 2. Etihad\n 3. Lufthansa\n 4. Qantas\n 5. Qatar "
+              "Airways";
+      cout << "\n\n Enter your choice: ";
+      int num;
+      cin >> num;
+      while ((num > 5) || (num < 1)) {
+        cout << "\n ERROR603! Choice does not exist!\n";
+        cout << " Enter your choice: ";
+        cin >> num;
+      }
+      switch (num) {
+      case 1:
+        cout << " Emirates operator registered successfully\n\n";
+        airline = "Emirates";
+        break;
+      case 2:
+        cout << " Etihad operator registered successfully\n\n";
+        airline = "Etihad";
+        break;
+      case 3:
+        cout << " Lufthansa operator registered successfully\n\n";
+        airline = "Lufthansa";
+        break;
+      case 4:
+        cout << " Qantas operator registered successfully\n\n";
+        airline = "Qantas";
+        break;
+      case 5:
+        cout << " Qatar Airways operator registered successfully\n\n";
+        airline = "Qatar Airways";
+      }
+    }
+  }
+  void enterDivision(void) {
+    int num;
+    cin >> num;
+    while ((num != 1) && (num != 2)) {
+      cout << " ERROR604! Division option does not exist!\n";
+      cout << " Enter your choice: ";
+      cin >> num;
+    }
+    if (num == 1) {
+      cout << " Economy Class selected successfully\n\n";
+      division = "Economy";
+    } else {
+      cout << " Business Class selected successfully\n\n";
+      division = "Business";
+    }
+  }
+  void enterRoute(void) {
+    if (dummy == 1) {
+      cout << " Enter your route\n";
+      cout << " 1. Kolkata -- Delhi    \n";
+      cout << " 2. Kolkata -- Chennai  \n";
+      cout << " 3. Kolkata -- Mumbai   \n";
+      cout << " 4. Kolkata -- Hyderabad\n";
+      cout << " 5. Kolkata -- Bangalore\n";
+      cout << " 6. Kolkata -- Noida    \n";
+      cout << " 7. Kolkata -- Guwahati \n";
+      cout << "\n Enter your route option: ";
+      int num;
+      cin >> num;
+      while ((num > 7) || (num < 1)) {
+        cout << " ERROR605! Route option does not exist!\n";
+        cout << " Enter correct route option: ";
+        cin >> num;
+      }
+      switch (num) {
+      case 1:
+        cout << " Kolkata -- Delhi route selected successfully\n";
+        route = "Kolkata -- Delhi";
+        break;
+      case 2:
+        cout << " Kolkata -- Chennai route selected successfully\n";
+        route = "Kolkata -- Chennai";
+        break;
+      case 3:
+        cout << " Kolkata -- Mumbai route selected successfully\n";
+        route = "Kolkata -- Mumbai";
+        break;
+      case 4:
+        cout << " Kolkata -- Hyderabad route selected successfully\n";
+        route = "Kolkata -- Hyderabad";
+        break;
+      case 5:
+        cout << " Kolkata -- Bangalore route selected successfully\n";
+        route = "Kolkata -- Bangalore";
+        break;
+      case 6:
+        cout << " Kolkata -- Noida route selected successfully\n";
+        route = "Kolkata -- Noida";
+        break;
+      case 7:
+        cout << " Kolkata -- Guwahati route selected successfully\n";
+        route = "Kolkata -- Guwahati";
+      }
+    } else {
+      cout << " Enter your route\n";
+      cout << " 1. Kolkata -- Dhaka       \n";
+      cout << " 2. Kolkata -- Shanghai    \n";
+      cout << " 3. Kolkata -- Kathmandu   \n";
+      cout << " 4. Kolkata -- Bangkok     \n";
+      cout << " 5. Kolkata -- Singapore   \n";
+      cout << " 6. Kolkata -- Tokyo       \n";
+      cout << " 7. Kolkata -- Seoul       \n";
+      cout << " 8. Kolkata -- Kuala Lumpur\n";
+      cout << " 9. Kolkata -- Melbourne   \n";
+      cout << "\n Enter your route option: ";
+      int num;
+      cin >> num;
+      while ((num > 9) || (num < 1)) {
+        cout << " ERROR606! Route option does not exist!\n";
+        cout << " Enter correct route option: ";
+        cin >> num;
+      }
+      switch (num) {
+      case 1:
+        cout << " Kolkata -- Dhaka route selected successfully\n";
+        route = "Kolkata -- Dhaka";
+        break;
+      case 2:
+        cout << " Kolkata -- Shanghai route selected successfully\n";
+        route = "Kolkata -- Shanghai";
+        break;
+      case 3:
+        cout << " Kolkata -- Kathmandu route selected successfully\n";
+        route = "Kolkata -- Kathmandu";
+        break;
+      case 4:
+        cout << " Kolkata -- Bangkok route selected successfully\n";
+        route = "Kolkata -- Bangkok";
+        break;
+      case 5:
+        cout << " Kolkata -- Singapore route selected successfully\n";
+        route = "Kolkata -- Singapore";
+        break;
+      case 6:
+        cout << " Kolkata -- Tokyo route selected successfully\n";
+        route = "Kolkata -- Tokyo";
+        break;
+      case 7:
+        cout << " Kolkata -- Seoul route selected successfully\n";
+        route = "Kolkata -- Seoul";
+        break;
+      case 8:
+        cout << " Kolkata -- Kuala Lumpur route selected successfully\n";
+        route = "Kolkata -- Kuala Lumpur";
+        break;
+      case 9:
+        cout << " Kolkata -- Melbourne route selected successfully\n";
+        route = "Kolkata -- Melbourne";
+      }
+    }
+  }
+  string displayTravelType(void) { return travelType; }
+  string displayAirline(void) { return airline; }
+  string displayDivision(void) { return division; }
+  void mainDisplayScreen(void) {
+    cout << "---------------------------------------------\n";
+    cout << "----- AIRWAYS TRAVEL AND BOOKING TICKET -----\n\n";
+    cout << "  Name: " << name << endl;
+    cout << "  Mode of Transport: " << transportMode << endl;
+    cout << "  Travelling Type: " << travelType << endl;
+    cout << "  Airline Name: " << airline << endl;
+    cout << "  Travelling Class: " << division << endl;
+    cout << "  Route: " << route << endl;
+    cout << "  Total Tickets booked: " << totalTickets << endl << endl;
+    cout << "---------------------------------------------";
+  }
+};
+
+void roadwaysBooking(void) {
+  roadways Booking("Roadways");
+  Booking.enterName();
+  cout << " Enter your travel type\n 1. Local Bus\n 2. Intercity Bus\n";
+  cout << " Enter your choice: ";
+  Booking.enterTravelType();
+  cout << " Enter your AC choice\n 1. Non AC\n 2. Full AC\n";
+  cout << " Enter your AC option: ";
+  Booking.enterAcOption();
+  Booking.enterOperatorName();
+  Booking.enterRoute();
+  cout << "\n Enter number of tickets (Maximum 20 allowed): ";
+  Booking.enterNumberofTickets();
+  Booking.mainDisplayScreen();
+}
+void railwaysBooking(void) {
+  railways Booking("Railways");
+  Booking.enterName();
+  cout << " Enter your travel type\n 1. Local Train\n 2. Express Train\n";
+  cout << " Enter your choice: ";
+  Booking.enterTravelType();
+  cout << " Enter AC Prefernce\n 1. Non AC\n 2. Full AC\n";
+  cout << " Enter your AC option: ";
+  Booking.enterCoachAC();
+  Booking.enterCoachType();
+  Booking.enterRoute();
+  cout << "\n Enter number of tickets (Maximum 20 allowed): ";
+  Booking.enterNumberofTickets();
+  Booking.mainDisplayScreen();
+}
+void waterwaysBooking(void) {
+  waterways Booking("Waterways");
+  Booking.enterName();
+  cout << " Enter your travel type\n 1. Steamer\n 2. Cruise Ship\n";
+  cout << " Enter your choice: ";
+  Booking.enterTravelType();
+  Booking.enterOperatorName();
+  Booking.enterRoute();
+  cout << "\n Enter number of tickets (Maximum 20 allowed): ";
+  Booking.enterNumberofTickets();
+  Booking.mainDisplayScreen();
+}
+void airwaysBooking(void) {
+  airways Booking("Airways");
+  Booking.enterName();
+  cout << " Enter your travel type\n 1. Domestic\n 2. International\n";
+  cout << " Enter your travel type option: ";
+  Booking.enterTravelType();
+  Booking.enterAirlineName();
+  cout << " Enter your travelling class\n 1. Economy Class\n 2. Business "
+          "Class\n";
+  cout << " Enter your travelling class option: ";
+  Booking.enterDivision();
+  Booking.enterRoute();
+  cout << "\n Enter number of tickets (Maximum 20 allowed): ";
+  Booking.enterNumberofTickets();
+  Booking.mainDisplayScreen();
+}
+
+void startBooking(void) {
+  cout << "\n Enter mode of travel\n\n";
+  cout << " 1. Roadways\n 2. Railways\n 3. Waterways\n 4. Airways\n\n";
+  cout << " Enter choice of mode : ";
+  int modeChoice;
+  cin >> modeChoice;
+  while ((modeChoice > 4) || (modeChoice < 1)) {
+    cout << "\n ERROR102! Choice does not exist!\n";
+    cout << " Enter choice of mode : ";
+    cin >> modeChoice;
+  }
+  switch (modeChoice) {
+  case 1:
+    roadwaysBooking();
+    break;
+  case 2:
+    railwaysBooking();
+    break;
+  case 3:
+    waterwaysBooking();
+    break;
+  case 4:
+    airwaysBooking();
+  }
+}
+int mainMenu(void) {
+  int choice;
+  cin >> choice;
+  while ((choice != 1) && (choice != 2)) {
+    cout << "\n ERROR101! Input number has no meaning!\n";
+    cout << " Enter your choice: ";
+    cin >> choice;
+  }
+  return choice;
+}
+void start(void) {
+  cout << "\n Welcome to Travel&Travel : One stop booking destination !!";
+  cout << "\n\n What is your wish today?\n";
+  cout << "\n 1. Ticket Reservation\n 2. Exit\n\n Enter your choice: ";
+  if (mainMenu() == 1) {
+    startBooking();
+  } else {
+    cout << "\n Have a nice day! Visit again!";
+    return;
+  }
+  cout << "\n\n Do you want to book any other tickets?\n";
+  cout << " Press 1 to continue or any other number to exit\n";
+  cout << " Enter your choice: ";
+  int no;
+  cin >> no;
+  if (no == 1) {
+    start();
+  } else {
+    cout << "\n Have a nice day! Visit again!";
+  }
+}
+
+int main(void) {
+  start();
+  return 0;
+}
+
+// THALA FOR A REASON
